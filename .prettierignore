@@ -1,0 +1,5 @@
+dist/
+
+*.js
+*.html
+package-lock.json

@@ -1,0 +1,15 @@
+{
+	"scripts": {
+		"build": "npm run build:core",
+		"build:core": "npx tsc --project src/"
+	},
+	"devDependencies": {
+		"@types/react": "^19.2.15",
+		"@types/react-dom": "^19.2.3",
+		"@w-lfpup/superaction": "github:w-lfpup/superaction-js",
+		"prettier": "^3.8.3",
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6",
+		"typescript": "^6.0.3"
+	}
+}
