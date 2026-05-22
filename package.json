@@ -1,7 +1,9 @@
 {
 	"scripts": {
-		"build": "npm run build:core",
-		"build:core": "npx tsc --project src/"
+		"build": "npm run build:core && npm run build:examples",
+		"build:core": "npx tsc --project src/",
+		"build:examples": "npx tsc --project examples/",
+		"format": "npx prettier ./ --write"
 	},
 	"devDependencies": {
 		"@types/react": "^19.2.15",
