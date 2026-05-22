@@ -23,7 +23,7 @@ export function SuperProvider(props: ProviderProps) {
 	useEffect(function () {
 		let superAction = new SuperAction({
 			host: document,
-			infix: "_",
+			infix: "-",
 			connected: true,
 			eventNames,
 		});
