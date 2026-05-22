@@ -1,4 +1,4 @@
-import React, { Context, ReactNode, useEffect, useState } from "react";
+import React, { Context, ReactNode, useEffect, useState, useMemo } from "react";
 import {
 	SuperAction,
 	ActionInterface,
@@ -19,6 +19,7 @@ export function SuperProvider(props: ProviderProps) {
 	let [contextValue, setContextValue] = useState<ActionInterface | undefined>(
 		undefined,
 	);
+	console.log("from provider", contextValue);
 
 	useEffect(function () {
 		let superAction = new SuperAction({
@@ -37,10 +38,12 @@ export function SuperProvider(props: ProviderProps) {
 			superAction.disconnect();
 			document.removeEventListener("#action", cb);
 		};
-	}, []);
+	}, [eventNames]);
 
+	let memod = useMemo(() => contextValue, [contextValue])
+	
 	return (
-		<SuperContext.Provider value={contextValue}>
+		<SuperContext.Provider value={memod}>
 			{children}
 		</SuperContext.Provider>
 	);
