@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAction, useSuperAction } from "../../dist/mod.js";
+import { useSuperAction } from "../../dist/mod.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
 export function Counter() {
@@ -7,8 +7,8 @@ export function Counter() {
 
 	useSuperAction((action: ActionInterface) => {
 		let { type } = action;
-		if (type === "increment") setCount((count) => count + 1);
-		if (type === "decrement") setCount((count) => count - 1);
+		if (type === "increment") setCount(count + 1);
+		if (type === "decrement") setCount(count - 1);
 	});
 
 	return (
