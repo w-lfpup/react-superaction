@@ -1,0 +1,142 @@
+# react-superaction
+
+Turn the virtual-dom into a declarative event-bus.
+
+(a port of [superaction](https://github.com/w-lfpup/superaction-js) for React)
+
+# Install
+
+Install via npm.
+
+```sh
+npm install --save-dev @w-lfpup/react-superaction
+```
+
+Or install directly from github.
+
+```sh
+npm install --save-dev https://github.com/w-lfpup/react-superaction
+```
+
+# Setup
+
+Add a SuperActionProvider component to broadcast action events.
+
+The SuperActionProvider component below listens for click events. React developers can access action events.
+
+```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { SuperActionProvider } from "@w-lfpup/react-superaction";
+import { App } from "./App.js";
+
+let eventNames: string[] = ["click"];
+
+let rootEl = document.querySelector("#root")!;
+const root = ReactDOM.createRoot(rootEl);
+root.render(
+	<SuperActionProvider eventNames={eventNames}>
+		<Counter />
+	</SuperActionProvider>,
+);
+```
+
+# Declare
+
+Add an attribute with the pattern `event-=action`.
+
+```html
+<button click-="increment">+</button>
+```
+
+# Listen
+
+Now the button dispatches ActionEvents when clicked. The `useSuperAction` hook connects action events to react-land.
+
+```tsx
+import React, { useState } from "react";
+import { ActionInterface, useSuperAction } from "@w-lfpup/react-superaction";
+
+export function Counter() {
+	let [count, setCount] = useState(0);
+
+	useSuperAction((action: ActionInterface) => {
+		if ("increment" === action.type) setCount(count + 1);
+	});
+
+	return <button click-="increment">{count</button>
+}
+```
+
+The action object has several properties related to an action event including:
+
+- the action type
+- the original dom event
+- the action event target
+- associated formData
+
+```ts
+let { type, event, target, formData } = action;
+```
+
+Form data is available when an action event originates from a element.
+
+## Event stacking
+
+`Superaction-js` listens to any DOM event that bubbles. It also dispatches all actions found along the composed path of a DOM event.
+
+Turns out that's [all UI Events](https://www.w3.org/TR/uievents/#events-uievents). Which is a lot of events!
+
+Consider the following example:
+
+```html
+<body click-="A">
+	<div click-="B">
+		<button click-="C">hai :3</button>
+	</div>
+</body>
+```
+
+When a person clicks the button above, the order of action events is:
+
+- Action "C"
+- Action "B"
+- Action "A"
+
+## Propagation
+
+Action events propagate similar to DOM events. Their declarative API reflects their DOM Event counterpart:
+
+- `event-prevent-default`
+- `event-stop-propagation`
+- `event-stop-immediate-propagation`
+
+Consider the following example:
+
+```html
+<body click-="A" click-stop-immediate-propagation>
+	<form click-="B" click-prevent-default>
+		<button type="submit" click-="C">UwU</button>
+		<button type="submit" click-="D" click-stop-propagation>^_^</button>
+	</form>
+</body>
+```
+
+So when a person clicks the buttons above, the order of actions is:
+
+Click button C:
+
+- Action "C" dispatched
+- `preventDefault()` is called on the original `HTMLSubmitEvent`
+- Action "B" dispatched
+- Action propagation is stopped similar to `event.stopImmediatePropagation()`
+- Action "A" does _not_ dispatch
+
+Click button D:
+
+- Action "D" dispatched
+- Action event propagation stopped similar to `event.stopPropagation()`
+
+# License
+
+React-superaction is released under the BSD-3 Clause License.

@@ -30281,7 +30281,6 @@ class SuperAction {
     }
     #dispatch = this.#unboundDispatch.bind(this);
     #unboundDispatch(event) {
-        console.log(event);
         let { type, currentTarget, target } = event;
         if (!currentTarget)
             return;

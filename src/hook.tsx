@@ -16,7 +16,6 @@ export function useSuperAction(cb: Cb) {
 	if (action) cb(action);
 }
 
-// single action hook useAction("howdy")
 export function useAction(type: string, cb: Cb): ActionInterface | undefined {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(

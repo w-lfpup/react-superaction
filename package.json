@@ -1,6 +1,10 @@
 {
-	"name": "react-superaction",
+	"name": "@w-lfpup/react-superaction",
 	"type": "module",
+	"main": "dist/mod.js",
+	"description": "Turn the virtual-dom into a declarative event-bus",
+	"license": "BSD-3-Clause",
+	"version": "0.1.0",
 	"scripts": {
 		"build": "npm run build:core && npm run build:examples",
 		"build:core": "npx tsc --project src/",
@@ -22,5 +26,9 @@
 		"react-dom": "^19.2.6",
 		"rollup": "^4.60.4",
 		"typescript": "^6.0.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/w-lfpup/react-superaction.git"
 	}
 }
