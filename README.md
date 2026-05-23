@@ -49,9 +49,11 @@ Add an attribute with the pattern `event-=action`.
 <button click-="increment">+</button>
 ```
 
+Now the button dispatches ActionEvents when clicked. 
+
 ## Listen
 
-Now the button dispatches ActionEvents when clicked. The `useSuperAction` hook connects action events to react-land.
+The `useSuperAction` hook connects action events to react-land.
 
 ```tsx
 import React, { useState } from "react";
