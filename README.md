@@ -20,9 +20,9 @@ npm install --save-dev https://github.com/w-lfpup/react-superaction
 
 ## Setup
 
-Add a SuperActionProvider component to broadcast action events.
+Add a `SuperActionProvider` component to broadcast action events.
 
-The SuperActionProvider component below listens for click events. React developers can access action events.
+The `SuperActionProvider` component below listens for click events. React developers can access action events.
 
 ```tsx
 import React from "react";
