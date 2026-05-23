@@ -4,7 +4,7 @@ Turn the virtual-dom into a declarative event-bus.
 
 (a port of [superaction](https://github.com/w-lfpup/superaction-js) for React)
 
-# Install
+## Install
 
 Install via npm.
 
@@ -18,7 +18,7 @@ Or install directly from github.
 npm install --save-dev https://github.com/w-lfpup/react-superaction
 ```
 
-# Setup
+## Setup
 
 Add a SuperActionProvider component to broadcast action events.
 
@@ -32,7 +32,7 @@ import { App } from "./App.js";
 
 let eventNames: string[] = ["click"];
 
-let rootEl = document.querySelector("#root")!;
+let rootEl = document.querySelector("##root")!;
 const root = ReactDOM.createRoot(rootEl);
 root.render(
 	<SuperActionProvider eventNames={eventNames}>
@@ -41,7 +41,7 @@ root.render(
 );
 ```
 
-# Declare
+## Declare
 
 Add an attribute with the pattern `event-=action`.
 
@@ -49,7 +49,7 @@ Add an attribute with the pattern `event-=action`.
 <button click-="increment">+</button>
 ```
 
-# Listen
+## Listen
 
 Now the button dispatches ActionEvents when clicked. The `useSuperAction` hook connects action events to react-land.
 
@@ -137,6 +137,6 @@ Click button D:
 - Action "D" dispatched
 - Action event propagation stopped similar to `event.stopPropagation()`
 
-# License
+## License
 
 React-superaction is released under the BSD-3 Clause License.
