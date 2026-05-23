@@ -5,9 +5,9 @@ export function Counter() {
     useSuperAction((action) => {
         let { type } = action;
         if (type === "increment")
-            setCount((count) => count + 1);
+            setCount(count + 1);
         if (type === "decrement")
-            setCount((count) => count - 1);
+            setCount(count - 1);
     });
     return (React.createElement(React.Fragment, null,
         React.createElement("button", { "click-": "decrement" }, "-"),

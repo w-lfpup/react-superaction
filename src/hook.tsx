@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { SuperContext } from "./provider.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
+type Cb = (action: ActionInterface) => void;
+
 export function useSuperAction(cb: Cb) {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
@@ -15,7 +17,7 @@ export function useSuperAction(cb: Cb) {
 }
 
 // single action hook useAction("howdy")
-export function useAction(type: string): ActionInterface | undefined {
+export function useAction(type: string, cb: Cb): ActionInterface | undefined {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
 		undefined,
@@ -27,7 +29,6 @@ export function useAction(type: string): ActionInterface | undefined {
 		setPrevAction(action);
 		return action;
 	}
-}
 
-// all the actions liste
-type Cb = (action: ActionInterface) => void;
+	if (action) cb(action)
+}

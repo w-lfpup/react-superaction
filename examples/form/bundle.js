@@ -30341,25 +30341,29 @@ function useSuperAction(cb) {
         cb(action);
 }
 
-function Counter() {
-    let [count, setCount] = reactExports.useState(0);
+function CustomForm() {
+    let [formAsJSON, setFormAsJSON] = reactExports.useState("");
     useSuperAction((action) => {
-        let { type } = action;
-        if (type === "increment")
-            setCount(count + 1);
-        if (type === "decrement")
-            setCount(count - 1);
+        let { type, formData } = action;
+        if (type === "submit_form" && formData) {
+            let entries = Object.fromEntries(formData.entries());
+            setFormAsJSON(JSON.stringify(entries, undefined, " "));
+        }
     });
     return (React.createElement(React.Fragment, null,
-        React.createElement("button", { "click-": "decrement" }, "-"),
-        React.createElement("button", { "click-": "increment" }, "+"),
-        React.createElement("p", null, count)));
+        React.createElement("form", { "submit-": "submit_form", "submit-prevent-default": "" },
+            React.createElement("input", { type: "email", name: "email" }),
+            React.createElement("br", null),
+            React.createElement("input", { type: "password", name: "password" }),
+            React.createElement("br", null),
+            React.createElement("button", { type: "submit" }, "let's go!")),
+        React.createElement("pre", null, formAsJSON)));
 }
 
-let eventNames = ["click"];
+let eventNames = ["submit"];
 let rootEl = document.querySelector("#root");
 if (rootEl) {
     const root = ReactDOM.createRoot(rootEl);
     root.render(React.createElement(SuperProvider, { eventNames: eventNames },
-        React.createElement(Counter, null)));
+        React.createElement(CustomForm, null)));
 }
