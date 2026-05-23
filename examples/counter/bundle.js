@@ -30310,7 +30310,7 @@ class SuperAction {
 const SuperContext = React.createContext(undefined);
 function SuperProvider(props) {
     let { eventNames, children } = props;
-    let [contextValue, setContextValue] = reactExports.useState(undefined);
+    let [value, setValue] = reactExports.useState(undefined);
     reactExports.useEffect(function () {
         let superAction = new SuperAction({
             host: document,
@@ -30319,7 +30319,7 @@ function SuperProvider(props) {
             eventNames,
         });
         let cb = function (e) {
-            setContextValue(e.action);
+            setValue(e.action);
         };
         document.addEventListener("#action", cb);
         return function () {
@@ -30327,12 +30327,10 @@ function SuperProvider(props) {
             document.removeEventListener("#action", cb);
         };
     }, []);
-    let currAction = reactExports.useMemo(() => contextValue, [contextValue]);
-    console.log("superprovider:", currAction);
-    return (React.createElement(SuperContext.Provider, { value: currAction }, children));
+    return (React.createElement(SuperContext.Provider, { value: value }, children));
 }
 
-function useActionReducer(cb) {
+function useSuperAction(cb) {
     let action = reactExports.useContext(SuperContext);
     let [prevAction, setPrevAction] = reactExports.useState(undefined);
     if (action === prevAction)
@@ -30344,7 +30342,7 @@ function useActionReducer(cb) {
 
 function Counter() {
     let [count, setCount] = reactExports.useState(0);
-    useActionReducer((action) => {
+    useSuperAction((action) => {
         let { type } = action;
         if (type === "increment")
             setCount((count) => count + 1);

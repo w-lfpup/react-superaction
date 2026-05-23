@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useActionReducer } from "../../dist/mod.js";
+import { useSuperAction } from "../../dist/mod.js";
 export function Counter() {
     let [count, setCount] = useState(0);
-    useActionReducer((action) => {
+    useSuperAction((action) => {
         let { type } = action;
         if (type === "increment")
             setCount((count) => count + 1);

@@ -1,8 +1,8 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useState } from "react";
 import { SuperContext } from "./provider.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
-export function useActionReducer(cb: Cb) {
+export function useSuperAction(cb: Cb) {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
 		undefined,
