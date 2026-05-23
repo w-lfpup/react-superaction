@@ -6,12 +6,11 @@ import { Counter } from "./counter.js";
 let eventNames: string[] = ["click"];
 
 let rootEl = document.querySelector("#root");
-console.log(rootEl);
 if (rootEl) {
 	const root = ReactDOM.createRoot(rootEl);
-	root.render((
+	root.render(
 		<SuperProvider eventNames={eventNames}>
 			<Counter />
-		</SuperProvider>
-	));
+		</SuperProvider>,
+	);
 }

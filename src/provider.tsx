@@ -16,10 +16,7 @@ export const SuperContext = React.createContext<ActionInterface | undefined>(
 
 export function SuperProvider(props: ProviderProps) {
 	let { eventNames, children } = props;
-	let [contextValue, setContextValue] = useState<ActionInterface | undefined>(
-		undefined,
-	);
-	console.log("from provider", contextValue);
+	let [value, setValue] = useState<ActionInterface | undefined>(undefined);
 
 	useEffect(function () {
 		let superAction = new SuperAction({
@@ -30,21 +27,18 @@ export function SuperProvider(props: ProviderProps) {
 		});
 
 		let cb = function (e: ActionEventInterface) {
-			setContextValue(e.action);
+			setValue(e.action);
 		};
+
 		document.addEventListener("#action", cb);
 
 		return function () {
 			superAction.disconnect();
 			document.removeEventListener("#action", cb);
 		};
-	}, [eventNames]);
+	}, []);
 
-	let memod = useMemo(() => contextValue, [contextValue])
-	
 	return (
-		<SuperContext.Provider value={memod}>
-			{children}
-		</SuperContext.Provider>
+		<SuperContext.Provider value={value}>{children}</SuperContext.Provider>
 	);
 }

@@ -30311,7 +30311,6 @@ const SuperContext = React.createContext(undefined);
 function SuperProvider(props) {
     let { eventNames, children } = props;
     let [contextValue, setContextValue] = reactExports.useState(undefined);
-    console.log("from provider", contextValue);
     reactExports.useEffect(function () {
         let superAction = new SuperAction({
             host: document,
@@ -30327,28 +30326,28 @@ function SuperProvider(props) {
             superAction.disconnect();
             document.removeEventListener("#action", cb);
         };
-    }, [eventNames]);
-    let memod = reactExports.useMemo(() => contextValue, [contextValue]);
-    return (React.createElement(SuperContext.Provider, { value: memod }, children));
+    }, []);
+    let currAction = reactExports.useMemo(() => contextValue, [contextValue]);
+    console.log("superprovider:", currAction);
+    return (React.createElement(SuperContext.Provider, { value: currAction }, children));
 }
 
 function useActionReducer(cb) {
     let action = reactExports.useContext(SuperContext);
-    let memod = reactExports.useMemo(() => action, [action]);
-    console.log("useActionReducer", action);
-    if (memod)
-        cb(memod);
+    let [prevAction, setPrevAction] = reactExports.useState(undefined);
+    if (action === prevAction)
+        return;
+    setPrevAction(action);
+    if (action)
+        cb(action);
 }
 
 function Counter() {
     let [count, setCount] = reactExports.useState(0);
     useActionReducer((action) => {
         let { type } = action;
-        console.log("from action reducer", action);
-        if (type === "increment") {
-            console.log(type);
-            setCount(2);
-        }
+        if (type === "increment")
+            setCount((count) => count + 1);
         if (type === "decrement")
             setCount((count) => count - 1);
     });
@@ -30360,9 +30359,8 @@ function Counter() {
 
 let eventNames = ["click"];
 let rootEl = document.querySelector("#root");
-console.log(rootEl);
 if (rootEl) {
     const root = ReactDOM.createRoot(rootEl);
-    root.render((React.createElement(SuperProvider, { eventNames: eventNames },
-        React.createElement(Counter, null))));
+    root.render(React.createElement(SuperProvider, { eventNames: eventNames },
+        React.createElement(Counter, null)));
 }
