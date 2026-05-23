@@ -30340,7 +30340,7 @@ function useSuperAction(cb) {
         cb(action);
 }
 
-function CustomForm() {
+function Form() {
     let [formAsJSON, setFormAsJSON] = reactExports.useState("");
     useSuperAction((action) => {
         let { type, formData } = action;
@@ -30364,5 +30364,5 @@ let rootEl = document.querySelector("#root");
 if (rootEl) {
     const root = ReactDOM.createRoot(rootEl);
     root.render(React.createElement(SuperActionProvider, { eventNames: eventNames },
-        React.createElement(CustomForm, null)));
+        React.createElement(Form, null)));
 }

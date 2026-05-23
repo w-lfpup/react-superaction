@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSuperAction } from "../../dist/mod.js";
-export function CustomForm() {
+export function Form() {
     let [formAsJSON, setFormAsJSON] = useState("");
     useSuperAction((action) => {
         let { type, formData } = action;

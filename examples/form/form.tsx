@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSuperAction, useAction } from "../../dist/mod.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
-export function CustomForm() {
+export function Form() {
 	let [formAsJSON, setFormAsJSON] = useState<string>("");
 
 	useSuperAction((action: ActionInterface) => {
