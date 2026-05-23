@@ -30309,7 +30309,7 @@ class SuperAction {
 }
 
 const SuperContext = React.createContext(undefined);
-function SuperProvider(props) {
+function SuperActionProvider(props) {
     let { eventNames, children } = props;
     let [value, setValue] = reactExports.useState(undefined);
     reactExports.useEffect(function () {
@@ -30364,6 +30364,6 @@ let eventNames = ["submit"];
 let rootEl = document.querySelector("#root");
 if (rootEl) {
     const root = ReactDOM.createRoot(rootEl);
-    root.render(React.createElement(SuperProvider, { eventNames: eventNames },
+    root.render(React.createElement(SuperActionProvider, { eventNames: eventNames },
         React.createElement(CustomForm, null)));
 }

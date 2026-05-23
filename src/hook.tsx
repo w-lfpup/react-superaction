@@ -30,5 +30,5 @@ export function useAction(type: string, cb: Cb): ActionInterface | undefined {
 		return action;
 	}
 
-	if (action) cb(action)
+	if (action) cb(action);
 }

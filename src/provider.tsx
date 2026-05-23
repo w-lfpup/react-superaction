@@ -14,7 +14,7 @@ export const SuperContext = React.createContext<ActionInterface | undefined>(
 	undefined,
 );
 
-export function SuperProvider(props: ProviderProps) {
+export function SuperActionProvider(props: ProviderProps) {
 	let { eventNames, children } = props;
 	let [value, setValue] = useState<ActionInterface | undefined>(undefined);
 
