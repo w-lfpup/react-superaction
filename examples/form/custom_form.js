@@ -8,7 +8,6 @@ export function CustomForm() {
             let entries = Object.fromEntries(formData.entries());
             setFormAsJSON(JSON.stringify(entries, undefined, " "));
         }
-        ;
     });
     return (React.createElement(React.Fragment, null,
         React.createElement("form", { "submit-": "submit_form", "submit-prevent-default": "" },
