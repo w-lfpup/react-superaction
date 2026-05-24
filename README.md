@@ -30,7 +30,7 @@ import ReactDOM from "react-dom/client";
 import { SuperActionProvider } from "@w-lfpup/react-superaction";
 import { Counter } from "./counter.js";
 
-let rootEl = document.querySelector("##root")!;
+let rootEl = document.querySelector("#root")!;
 const root = ReactDOM.createRoot(rootEl);
 
 let eventNames: string[] = ["click"];
@@ -139,6 +139,32 @@ Click button D:
 
 - Action "D" dispatched
 - Action event propagation stopped similar to `event.stopPropagation()`
+
+## Discrepencies
+
+JSX and consequently React does not follow HTML spec. It transpiles HTML-looking
+syntax into a series of calls to a `pragma` function. It calls the function
+as many times as there are gator tags `<` declared.
+
+In `superaction` the syntax looks like:
+
+```html
+<button click:="do_something">click me!</button>
+```
+
+HTML considers `: _ @` all valid characters for attributes. It's very flexible.
+
+React / JSX is not HTML and restricts attribute characters to `-` and also `_`
+but only AFTER a `-`.
+
+So the syntax for `superaction` in react is limited to:
+
+```html
+<button click-="do_something">click me!</button>
+```
+
+I think it's very stupid to invent a syntax that's impossible to keep up your
+render target but this is the world and I'm not trying to argue too much.
 
 ## License
 
