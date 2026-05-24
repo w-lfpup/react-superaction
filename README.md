@@ -28,7 +28,7 @@ The `SuperActionProvider` component below listens for click events. React develo
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { SuperActionProvider } from "@w-lfpup/react-superaction";
-import { App } from "./App.js";
+import { Counter } from "./counter.js";
 
 let rootEl = document.querySelector("##root")!;
 const root = ReactDOM.createRoot(rootEl);
@@ -67,7 +67,7 @@ export function Counter() {
 		if ("increment" === action.type) setCount(count + 1);
 	});
 
-	return <button click-="increment">{count</button>
+	return <button click-="increment">{count}</button>
 }
 ```
 
@@ -118,10 +118,10 @@ Consider the following example:
 
 ```html
 <body click-="A" click-stop-immediate-propagation>
-	<form click-="B" click-prevent-default>
-		<button type="submit" click-="C">UwU</button>
-		<button type="submit" click-="D" click-stop-propagation>^_^</button>
-	</form>
+	<section click-="B" click-prevent-default>
+		<button click-="C">UwU</button>
+		<button click-="D" click-stop-propagation>^_^</button>
+	</section>
 </body>
 ```
 
@@ -130,10 +130,10 @@ So when a person clicks the buttons above, the order of actions is:
 Click button C:
 
 - Action "C" dispatched
-- `preventDefault()` is called on the original `HTMLSubmitEvent`
+- `preventDefault()` is called on the original `PointerEvent`
 - Action "B" dispatched
 - Action propagation is stopped similar to `event.stopImmediatePropagation()`
-- Action "A" does _not_ dispatch
+- Action "A" does _not_ dispatchß
 
 Click button D:
 
