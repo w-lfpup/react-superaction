@@ -22,12 +22,8 @@ export function useAction(type: string, cb: Cb): ActionInterface | undefined {
 		undefined,
 	);
 
-	if (action === prevAction) return;
+	if (action === prevAction || type === action?.type) return;
 
-	if (type === action?.type) {
-		setPrevAction(action);
-		return action;
-	}
-
+	setPrevAction(action);
 	if (action) cb(action);
 }

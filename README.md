@@ -30,10 +30,11 @@ import ReactDOM from "react-dom/client";
 import { SuperActionProvider } from "@w-lfpup/react-superaction";
 import { App } from "./App.js";
 
-let eventNames: string[] = ["click"];
-
 let rootEl = document.querySelector("##root")!;
 const root = ReactDOM.createRoot(rootEl);
+
+let eventNames: string[] = ["click"];
+
 root.render(
 	<SuperActionProvider eventNames={eventNames}>
 		<Counter />
@@ -49,7 +50,7 @@ Add an attribute with the pattern `event-=action`.
 <button click-="increment">+</button>
 ```
 
-Now the button dispatches ActionEvents when clicked. 
+Now the button dispatches ActionEvents when clicked.
 
 ## Listen
 
