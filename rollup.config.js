@@ -21,9 +21,9 @@ export default [
 		],
 	},
 	{
-		input: "node_modules/react-dom/index.js",
+		input: "node_modules/react-dom/client.js",
 		output: {
-			file: "examples/deps/reactdom_bundled.js",
+			file: "examples/deps/reactdom_client_bundled.js",
 			format: "es",
 		},
 		plugins: [
