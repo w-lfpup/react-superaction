@@ -67,7 +67,7 @@ export function Counter() {
 		if ("increment" === action.type) setCount(count + 1);
 	});
 
-	return <button click-="increment">{count}</button>
+	return <button click-="increment">{count}</button>;
 }
 ```
 
