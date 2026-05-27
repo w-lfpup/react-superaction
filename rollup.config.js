@@ -37,21 +37,4 @@ export default [
 			}),
 		],
 	},
-	{
-		input: "node_modules/@reduxjs/toolkit/dist/redux-toolkit.browser.mjs",
-		output: {
-			file: "examples/deps/redux_bundled.js",
-			format: "es",
-		},
-		plugins: [
-			nodeResolve({
-				extensions: [".js", ".jsx"],
-			}),
-			commonjs(),
-			replace({
-				preventAssignment: false,
-				"process.env.NODE_ENV": '"development"',
-			}),
-		],
-	}
 ];
