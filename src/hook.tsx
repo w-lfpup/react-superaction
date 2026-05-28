@@ -4,7 +4,7 @@ import { ActionInterface } from "@w-lfpup/superaction";
 
 type Cb = (action: ActionInterface) => void;
 
-export function useSuperAction(cb: Cb) {
+export function useSuperAction(cb: Cb): void {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
 		undefined,
@@ -16,19 +16,14 @@ export function useSuperAction(cb: Cb) {
 	if (action) cb(action);
 }
 
-// single action hook useAction("howdy")
-export function useAction(type: string, cb: Cb): ActionInterface | undefined {
+export function useAction(type: string, cb: Cb): void {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
 		undefined,
 	);
 
-	if (action === prevAction) return;
+	if (action === prevAction || type === action?.type) return;
 
-	if (type === action?.type) {
-		setPrevAction(action);
-		return action;
-	}
-
+	setPrevAction(action);
 	if (action) cb(action);
 }
