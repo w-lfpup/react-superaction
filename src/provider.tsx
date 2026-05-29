@@ -22,14 +22,14 @@ export function SuperActionProvider(props: ProviderProps) {
 		let superAction = new SuperAction({
 			host: document,
 			infix: "-",
-			connected: true,
 			eventNames,
 		});
 
-		let cb = function (e: ActionEventInterface) {
+		function cb(e: ActionEventInterface) {
 			setValue(e.action);
-		};
+		}
 
+		superAction.connect();
 		document.addEventListener("#action", cb);
 
 		return function () {
