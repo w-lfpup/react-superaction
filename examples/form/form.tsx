@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSuperAction, useAction } from "../../dist/mod.js";
+import { useSuperAction } from "../../dist/mod.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
 export function Form() {

@@ -8,6 +8,8 @@ import {
 interface ProviderProps {
 	eventNames: string[];
 	children: ReactNode;
+	host?: EventTarget;
+	target?: EventTarget;
 }
 
 export const SuperContext = React.createContext<ActionInterface | undefined>(
@@ -18,25 +20,28 @@ export function SuperActionProvider(props: ProviderProps) {
 	let { eventNames, children } = props;
 	let [value, setValue] = useState<ActionInterface | undefined>(undefined);
 
-	useEffect(function () {
-		let superAction = new SuperAction({
-			host: document,
-			infix: "-",
-			connected: true,
-			eventNames,
-		});
+	useEffect(
+		function () {
+			let superAction = new SuperAction({
+				host: document,
+				infix: "-",
+				eventNames,
+			});
 
-		let cb = function (e: ActionEventInterface) {
-			setValue(e.action);
-		};
+			function cb(e: ActionEventInterface) {
+				setValue(e.action);
+			}
 
-		document.addEventListener("#action", cb);
+			superAction.connect();
+			document.addEventListener("#action", cb);
 
-		return function () {
-			superAction.disconnect();
-			document.removeEventListener("#action", cb);
-		};
-	}, []);
+			return function () {
+				superAction.disconnect();
+				document.removeEventListener("#action", cb);
+			};
+		},
+		[eventNames],
+	);
 
 	return (
 		<SuperContext.Provider value={value}>{children}</SuperContext.Provider>

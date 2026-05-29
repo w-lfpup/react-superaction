@@ -2,7 +2,9 @@ import { useContext, useState } from "react";
 import { SuperContext } from "./provider.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
-type Cb = (action: ActionInterface) => void;
+interface Cb {
+	(action: ActionInterface): void;
+}
 
 export function useSuperAction(cb: Cb): void {
 	let action = useContext(SuperContext);
@@ -16,13 +18,13 @@ export function useSuperAction(cb: Cb): void {
 	if (action) cb(action);
 }
 
-export function useAction(type: string, cb: Cb): void {
+export function useActionSelector(cb: Cb, args: [string]): void {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
 		undefined,
 	);
 
-	if (action === prevAction || type === action?.type) return;
+	if (!action || action === prevAction || args[0] === action?.type) return;
 
 	setPrevAction(action);
 	if (action) cb(action);
