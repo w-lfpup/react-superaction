@@ -163,9 +163,6 @@ So the syntax for `superaction` in react is limited to:
 <button click-="do_something">click me!</button>
 ```
 
-I think it's very stupid to invent a syntax that's impossible to keep up your
-render target but this is the world and I'm not trying to argue too much.
-
 ## License
 
 React-superaction is released under the BSD-3 Clause License.
