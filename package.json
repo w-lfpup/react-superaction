@@ -13,9 +13,6 @@
 		"bundle": "rollup --config rollup.config.js",
 		"format": "npx prettier ./ --write"
 	},
-	"dependencies": {
-		"@w-lfpup/superaction": "github:w-lfpup/superaction-js"
-	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^29.0.2",
 		"@rollup/plugin-node-resolve": "^16.0.3",
@@ -31,5 +28,8 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/w-lfpup/react-superaction.git"
+	},
+	"dependencies": {
+		"@w-lfpup/superaction": "^0.4.4"
 	}
 }
