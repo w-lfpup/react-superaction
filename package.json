@@ -30,6 +30,6 @@
 		"url": "git+https://github.com/w-lfpup/react-superaction.git"
 	},
 	"dependencies": {
-		"@w-lfpup/superaction": "^0.4.4"
+		"@w-lfpup/superaction": "^0.4.5"
 	}
 }

@@ -2,8 +2,10 @@ import React, { ReactNode, useEffect, useState } from "react";
 import {
 	SuperAction,
 	ActionInterface,
-	ActionEventInterface,
+	ActionEvent,
 } from "@w-lfpup/superaction";
+
+import { SuperContext } from "./context.js";
 
 interface ProviderProps {
 	eventNames: string[];
@@ -12,32 +14,29 @@ interface ProviderProps {
 	target?: EventTarget;
 }
 
-export const SuperContext = React.createContext<ActionInterface | undefined>(
-	undefined,
-);
-
 export function SuperActionProvider(props: ProviderProps) {
-	let { eventNames, children } = props;
+	let { eventNames, children, host = document, target } = props;
 	let [value, setValue] = useState<ActionInterface | undefined>(undefined);
 
 	useEffect(
 		function () {
 			let superAction = new SuperAction({
-				host: document,
 				infix: "-",
+				host,
+				target,
 				eventNames,
 			});
 
-			function cb(e: ActionEventInterface) {
-				setValue(e.action);
+			function cb(e: Event) {
+				if (e instanceof ActionEvent) setValue(e.action);
 			}
 
 			superAction.connect();
-			document.addEventListener("#action", cb);
+			host.addEventListener("#action", cb);
 
 			return function () {
 				superAction.disconnect();
-				document.removeEventListener("#action", cb);
+				host.removeEventListener("#action", cb);
 			};
 		},
 		[eventNames],

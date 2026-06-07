@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { SuperContext } from "./provider.js";
+import { SuperContext } from "./context.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
 interface Cb {
