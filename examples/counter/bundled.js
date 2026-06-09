@@ -30244,7 +30244,7 @@ function requireClient () {
 var clientExports = requireClient();
 var ReactDOM = /*@__PURE__*/getDefaultExportFromCjs(clientExports);
 
-const SuperContext = React.createContext(undefined);
+const SuperContext = reactExports.createContext(undefined);
 
 function useAction(cb, args) {
     let action = reactExports.useContext(SuperContext);

@@ -1,7 +1,7 @@
 import type { ActionInterface } from "@w-lfpup/superaction";
 
-import React from "react";
+import { createContext } from "react";
 
-export const SuperContext = React.createContext<ActionInterface | undefined>(
+export const SuperContext = createContext<ActionInterface | undefined>(
 	undefined,
 );
