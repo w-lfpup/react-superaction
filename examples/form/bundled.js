@@ -30338,7 +30338,7 @@ function SuperActionProvider(props) {
             superAction.disconnect();
             host.removeEventListener("#action", cb);
         };
-    }, [eventNames]);
+    }, [host, target, eventNames]);
     return (React.createElement(SuperContext.Provider, { value: value }, children));
 }
 

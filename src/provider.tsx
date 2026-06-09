@@ -39,7 +39,7 @@ export function SuperActionProvider(props: ProviderProps) {
 				host.removeEventListener("#action", cb);
 			};
 		},
-		[eventNames],
+		[host, target, eventNames],
 	);
 
 	return (

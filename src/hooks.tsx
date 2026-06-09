@@ -18,13 +18,13 @@ export function useSuperAction(cb: Cb): void {
 	if (action) cb(action);
 }
 
-export function useActionSelector(cb: Cb, args: [string]): void {
+export function useActionSelector(cb: Cb, args?: [string]): void {
 	let action = useContext(SuperContext);
 	let [prevAction, setPrevAction] = useState<ActionInterface | undefined>(
 		undefined,
 	);
 
-	if (!action || action === prevAction || args[0] === action?.type) return;
+	if (!action || action === prevAction || args?.[0] !== action?.type) return;
 
 	setPrevAction(action);
 	if (action) cb(action);
