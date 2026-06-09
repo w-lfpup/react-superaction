@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useSuperAction } from "../../dist/mod.js";
+import { useAction } from "../../dist/mod.js";
 import { ActionInterface } from "@w-lfpup/superaction";
 
 export function Form() {
 	let [formAsJSON, setFormAsJSON] = useState<string>("");
 
-	useSuperAction((action: ActionInterface) => {
+	useAction((action: ActionInterface) => {
 		let { type, formData } = action;
 		if (type === "submit_form" && formData) {
 			let entries = Object.fromEntries(formData.entries());

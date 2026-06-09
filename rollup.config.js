@@ -4,14 +4,14 @@ import replace from "@rollup/plugin-replace";
 
 export default [
 	{
-		input: "node_modules/react/index.js",
+		input: "examples/counter/root.js",
 		output: {
-			file: "examples/deps/react_bundled.js",
+			file: "examples/counter/bundled.js",
 			format: "es",
 		},
 		plugins: [
 			nodeResolve({
-				extensions: [".js", ".jsx"],
+				extensions: [".js"],
 			}),
 			commonjs(),
 			replace({
@@ -21,14 +21,14 @@ export default [
 		],
 	},
 	{
-		input: "node_modules/react-dom/client.js",
+		input: "examples/form/root.js",
 		output: {
-			file: "examples/deps/reactdom_client_bundled.js",
+			file: "examples/form/bundled.js",
 			format: "es",
 		},
 		plugins: [
 			nodeResolve({
-				extensions: [".js", ".jsx"],
+				extensions: [".js"],
 			}),
 			commonjs(),
 			replace({

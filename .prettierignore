@@ -1,5 +1,6 @@
 dist/
 examples/
 
+*.bundled.js
 *.html
 package-lock.json

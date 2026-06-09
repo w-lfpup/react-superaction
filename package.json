@@ -4,19 +4,17 @@
 	"main": "dist/mod.js",
 	"description": "Turn the virtual-dom into a declarative event-bus",
 	"license": "BSD-3-Clause",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"scripts": {
 		"prepare": "npm run build",
-		"build": "npm run build:core && npm run build:examples",
+		"build": "npm run build:core && npm run build:examples && npm run bundle",
 		"build:core": "npx tsc --project src/",
 		"build:examples": "npx tsc --project examples/",
 		"bundle": "rollup --config rollup.config.js",
 		"format": "npx prettier ./ --write"
 	},
-	"dependencies": {
-		"@w-lfpup/superaction": "github:w-lfpup/superaction-js"
-	},
 	"devDependencies": {
+		"@reduxjs/toolkit": "^2.12.0",
 		"@rollup/plugin-commonjs": "^29.0.2",
 		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@rollup/plugin-replace": "^6.0.3",
@@ -25,11 +23,15 @@
 		"prettier": "^3.8.3",
 		"react": "^19.2.6",
 		"react-dom": "^19.2.6",
+		"react-redux": "^9.3.0",
 		"rollup": "^4.60.4",
 		"typescript": "^6.0.3"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/w-lfpup/react-superaction.git"
+	},
+	"dependencies": {
+		"@w-lfpup/superaction": "^0.4.5"
 	}
 }
