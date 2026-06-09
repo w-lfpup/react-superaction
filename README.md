@@ -54,16 +54,16 @@ Now the button dispatches ActionEvents when clicked.
 
 ## Listen
 
-The `useSuperAction` hook connects action events to react-land.
+The `useAction` hook connects action events to react-land.
 
 ```tsx
 import React, { useState } from "react";
-import { ActionInterface, useSuperAction } from "@w-lfpup/react-superaction";
+import { useAction } from "@w-lfpup/react-superaction";
 
 export function Counter() {
 	let [count, setCount] = useState(0);
 
-	useSuperAction((action: ActionInterface) => {
+	useAction((action) => {
 		if ("increment" === action.type) setCount(count + 1);
 	});
 
@@ -71,7 +71,7 @@ export function Counter() {
 }
 ```
 
-The action object has several properties related to an action event including:
+An action has several properties related to an action event including:
 
 - the action type
 - the original dom event

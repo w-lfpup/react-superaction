@@ -1,7 +1,6 @@
 import { ActionInterface } from "@w-lfpup/superaction";
-interface Cb {
+interface HookCallback {
     (action: ActionInterface): void;
 }
-export declare function useSuperAction(cb: Cb): void;
-export declare function useActionSelector(cb: Cb, args?: [string]): void;
+export declare function useAction(cb: HookCallback, args?: [string]): void;
 export {};

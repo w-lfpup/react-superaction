@@ -30246,7 +30246,7 @@ var ReactDOM = /*@__PURE__*/getDefaultExportFromCjs(clientExports);
 
 const SuperContext = React.createContext(undefined);
 
-function useSuperAction(cb) {
+function useAction(cb, args) {
     let action = reactExports.useContext(SuperContext);
     let [prevAction, setPrevAction] = reactExports.useState(undefined);
     if (action === prevAction)
@@ -30344,7 +30344,7 @@ function SuperActionProvider(props) {
 
 function Counter() {
     let [count, setCount] = reactExports.useState(0);
-    useSuperAction((action) => {
+    useAction((action) => {
         let { type } = action;
         if (type === "increment")
             setCount(count + 1);
