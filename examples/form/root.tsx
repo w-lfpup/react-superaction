@@ -4,7 +4,6 @@ import { SuperAction } from "@w-lfpup/superaction";
 import { SuperActionProvider } from "../../dist/mod.js";
 import { Form } from "./form.js";
 
-
 let rootEl = document.querySelector("#root");
 if (rootEl) {
 	let _superAction = new SuperAction({
