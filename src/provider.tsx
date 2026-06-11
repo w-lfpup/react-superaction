@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
-import React, { useEffect, useState } from "react";
-import { ActionInterface, ActionEvent } from "@w-lfpup/superaction";
+import type { ActionInterface } from "@w-lfpup/superaction";
 
+import React, { useEffect, useState } from "react";
+import { ActionEvent } from "@w-lfpup/superaction";
 import { SuperContext } from "./context.js";
 
 interface ProviderProps {
