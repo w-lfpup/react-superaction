@@ -11,6 +11,7 @@ if (rootEl) {
 		host: rootEl,
 		eventNames: ["submit"],
 		connected: true,
+		infix: "-", // react safe
 	});
 
 	const root = ReactDOM.createRoot(rootEl);

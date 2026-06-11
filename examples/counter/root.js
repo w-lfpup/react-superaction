@@ -7,8 +7,9 @@ let rootEl = document.querySelector("#root");
 if (rootEl) {
     let _superAction = new SuperAction({
         host: rootEl,
-        eventNames: ["submit"],
+        eventNames: ["click"],
         connected: true,
+        infix: "-", // react safe
     });
     const root = ReactDOM.createRoot(rootEl);
     root.render(React.createElement(SuperActionProvider, { target: rootEl },

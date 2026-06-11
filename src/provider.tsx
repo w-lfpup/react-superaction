@@ -12,10 +12,11 @@ interface ProviderProps {
 export function SuperActionProvider(props: ProviderProps) {
 	let { children, target } = props;
 	let [value, setValue] = useState<ActionInterface | undefined>(undefined);
-
+	console.log("provider!");
 	useEffect(
 		function () {
 			function cb(e: Event) {
+				console.log("events!!!");
 				if (e instanceof ActionEvent) setValue(e.action);
 			}
 

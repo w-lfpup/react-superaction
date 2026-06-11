@@ -30325,8 +30325,10 @@ function useAction(cb, args) {
 function SuperActionProvider(props) {
     let { children, target } = props;
     let [value, setValue] = reactExports.useState(undefined);
+    console.log("provider!");
     reactExports.useEffect(function () {
         function cb(e) {
+            console.log("events!!!");
             if (e instanceof ActionEvent)
                 setValue(e.action);
         }
@@ -30357,8 +30359,9 @@ let rootEl = document.querySelector("#root");
 if (rootEl) {
     new SuperAction({
         host: rootEl,
-        eventNames: ["submit"],
+        eventNames: ["click"],
         connected: true,
+        infix: "-", // react safe
     });
     const root = ReactDOM.createRoot(rootEl);
     root.render(React.createElement(SuperActionProvider, { target: rootEl },
