@@ -30325,10 +30325,8 @@ function useAction(cb, args) {
 function SuperActionProvider(props) {
     let { children, target } = props;
     let [value, setValue] = reactExports.useState(undefined);
-    console.log("provider!");
     reactExports.useEffect(function () {
         function cb(e) {
-            console.log("events!!!");
             if (e instanceof ActionEvent)
                 setValue(e.action);
         }

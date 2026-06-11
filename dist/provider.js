@@ -4,10 +4,8 @@ import { SuperContext } from "./context.js";
 export function SuperActionProvider(props) {
     let { children, target } = props;
     let [value, setValue] = useState(undefined);
-    console.log("provider!");
     useEffect(function () {
         function cb(e) {
-            console.log("events!!!");
             if (e instanceof ActionEvent)
                 setValue(e.action);
         }
