@@ -37,7 +37,8 @@ const root = ReactDOM.createRoot(rootEl);
 let _superAction = new SuperAction({
 	host: rootEl,
 	eventNames: ["click"],
-	connected: true;
+	connected: true,
+	infix: "-", // react-safe-html-attributes 
 })
 
 root.render(
