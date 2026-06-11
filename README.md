@@ -27,16 +27,21 @@ The `SuperActionProvider` component below listens for click events. React develo
 ```tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { SuperAction } from "@w-lfpup/superaction";
 import { SuperActionProvider } from "@w-lfpup/react-superaction";
 import { Counter } from "./counter.js";
 
 let rootEl = document.querySelector("#root")!;
 const root = ReactDOM.createRoot(rootEl);
 
-let eventNames: string[] = ["click"];
+let _superAction = new SuperAction({
+	host: rootEl,
+	eventNames: ["click"],
+	connected: true;
+})
 
 root.render(
-	<SuperActionProvider eventNames={eventNames}>
+	<SuperActionProvider target={rootEl}>
 		<Counter />
 	</SuperActionProvider>,
 );
