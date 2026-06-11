@@ -38,8 +38,8 @@ let _superAction = new SuperAction({
 	host: rootEl,
 	eventNames: ["click"],
 	connected: true,
-	infix: "-", // react-safe-html-attributes 
-})
+	infix: "-", // react-safe-html-attributes
+});
 
 root.render(
 	<SuperActionProvider target={rootEl}>
