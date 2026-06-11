@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActionEvent, } from "@w-lfpup/superaction";
+import { ActionEvent } from "@w-lfpup/superaction";
 import { SuperContext } from "./context.js";
 export function SuperActionProvider(props) {
     let { children, target } = props;

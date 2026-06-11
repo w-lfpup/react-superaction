@@ -30244,18 +30244,6 @@ function requireClient () {
 var clientExports = requireClient();
 var ReactDOM = /*@__PURE__*/getDefaultExportFromCjs(clientExports);
 
-const SuperContext = reactExports.createContext(undefined);
-
-function useAction(cb, args) {
-    let action = reactExports.useContext(SuperContext);
-    let [prevAction, setPrevAction] = reactExports.useState(undefined);
-    if (action === prevAction)
-        return;
-    setPrevAction(action);
-    if (action)
-        cb(action);
-}
-
 class ActionEvent extends Event {
     action;
     constructor(action, eventInit) {
@@ -30322,27 +30310,31 @@ function dispatch(params, event) {
     }
 }
 
+const SuperContext = reactExports.createContext(undefined);
+
+function useAction(cb, args) {
+    let action = reactExports.useContext(SuperContext);
+    let [prevAction, setPrevAction] = reactExports.useState(undefined);
+    if (action === prevAction)
+        return;
+    setPrevAction(action);
+    if (action)
+        cb(action);
+}
+
 function SuperActionProvider(props) {
-    let { eventNames, children, host = document, target } = props;
+    let { children, target } = props;
     let [value, setValue] = reactExports.useState(undefined);
     reactExports.useEffect(function () {
-        let superAction = new SuperAction({
-            infix: "-",
-            host,
-            target,
-            eventNames,
-        });
         function cb(e) {
             if (e instanceof ActionEvent)
                 setValue(e.action);
         }
-        superAction.connect();
-        host.addEventListener("#action", cb);
+        target.addEventListener("#action", cb);
         return function () {
-            superAction.disconnect();
-            host.removeEventListener("#action", cb);
+            target.removeEventListener("#action", cb);
         };
-    }, [host, target, eventNames]);
+    }, [target]);
     return (React.createElement(SuperContext.Provider, { value: value }, children));
 }
 
@@ -30361,10 +30353,14 @@ function Counter() {
         React.createElement("p", null, count)));
 }
 
-let eventNames = ["click"];
 let rootEl = document.querySelector("#root");
 if (rootEl) {
+    new SuperAction({
+        host: rootEl,
+        eventNames: ["submit"],
+        connected: true,
+    });
     const root = ReactDOM.createRoot(rootEl);
-    root.render(React.createElement(SuperActionProvider, { eventNames: eventNames },
+    root.render(React.createElement(SuperActionProvider, { target: rootEl },
         React.createElement(Counter, null)));
 }
